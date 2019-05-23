@@ -27,6 +27,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^weather/summary/(?P<city>[\w-]+)/(?P<date>[\w-]+)/(?P<hour_minute>[\w-]+)/', WeatherSummaryView.as_view(),
         name='weather-summary'),
-    url('^weather/<detail>/<city>/<date>/<hour_minute>/', WeatherDetailView.as_view(), name='weather-detail')
+    url('^weather/(?P<detail>[\w-]+)/(?P<city>[\w-]+)/(?P<date>[\w-]+)/(?P<hour_minute>[\w-]+)/', WeatherDetailView.as_view(), name='weather-detail')
 
 ]
