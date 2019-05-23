@@ -87,17 +87,18 @@ class WeatherDetailView(generics.RetrieveAPIView):
             date_display = datetime(year, month, day, hour, minutes)
 
             detail = kwargs["detail"]
-            if detail == "temperature":
-                detail = "temp"
 
             with open(PATH, 'r') as data:
                 data_response = json.load(data)
-                temp_k = float(data_response["main"]["temp"])
-                temp_c = int(temp_k - 273.15)
-                print("ok")
 
-                response_data = {"description": data_response["weather"][0]["description"],
-                                 detail: {"unit": units[detail], "value": data_response["main"][detail]},
+                if detail == "temperature":
+                    temp_k = float(data_response["main"]["temp"])
+                    value = int(temp_k - 273.15)
+                else:
+                    value = data_response["main"][detail]
+
+                response_data = {"unit": units[detail],
+                                 "value": value,
                                  "timestamp": date_display.strftime('%Y-%m-%d %H:%M:%S'),
                                  "status": "success"
                                  }
