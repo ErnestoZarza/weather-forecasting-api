@@ -16,6 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from weather_forecast_data.views import weather_summary_view, weather_detail_view
+
+# summary
+# http://<domain-name>/weather/summary/berlin/<date>/<hour minute>/
+
+# detail
+# http://<domain-name>/weather/temperature/berlin/<date>/<hour minute>/
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url('r^weather/summary/<city>/<date>/<hour_minute>/', weather_summary_view, name='weather-summary'),
+    url('r^weather/<detail>/<city>/<date>/<hour_minute>/', weather_detail_view, name='weather-detail')
+
 ]
