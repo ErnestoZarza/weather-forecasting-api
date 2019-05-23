@@ -1,4 +1,4 @@
-# Airport Information Service
+#  Weather Forecast API
 
 This project is an REST Service based web application that allows to retrieve information of the weather forecast for an
 specific city.
