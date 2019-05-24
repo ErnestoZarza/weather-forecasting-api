@@ -21,7 +21,7 @@ This application was implemented using the following technologies:
 ## Requirements
 
 * Python 3.x.x
-* Django 1.11.x
+* Django 2.x
 
 ## Runing the application
 
