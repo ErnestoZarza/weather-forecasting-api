@@ -10,8 +10,18 @@ from django.shortcuts import render
 from .utils import UNITS, is_valid_date
 
 
-def check_date(date, time):
-    """Method that check if it is a invalid datetime for the forecast service"""
+def check_parameters(date, time, city):
+    """Method that check if it is a invalid datetime and a valid city for the forecast service"""
+
+    if not city:
+        return False, Response(
+            data={
+                "message": "The city parameter can not be empty",
+                "status": "error"
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
     try:
         # date variables
         year = int(date[0:4])
@@ -50,12 +60,38 @@ def check_date(date, time):
             },
             status=status.HTTP_400_BAD_REQUEST
         )
+
     return True, date_display
 
 
+def retrieve_data_from_api(city):
+    """Method to retrieve the data from the weather api (openweathermap.org)"""
+    api_key = settings.WEATHER_API_KEY
+    # with 'units = metrics' the temperature in the response is in °C
+    endpoint = 'http://api.openweathermap.org/data/2.5/weather?q=%s,DE&units=metric&appid=%s' % (city, api_key)
+
+    data_response = requests.get(endpoint)
+
+    if data_response.status_code == 200:  # SUCCESS
+
+        return True, data_response.json()
+    else:
+        response_data = {}
+        if data_response.status_code == 404:  # NOT FOUND
+            response_data['message'] = 'No forecasts available for this city: %s' % city
+        else:
+            response_data['message'] = 'The Weather API is not available at the moment. Please try again later.'
+
+        response_data['status'] = 'error'
+        return False, Response(response_data,
+                               status=status.HTTP_400_BAD_REQUEST
+                               )
+
+
 class WeatherSummaryView(generics.RetrieveAPIView):
+    # TODO check empty entries
     """
-        GET http://<domain-name>/weather/summary/berlin/<date>/<hour minute>/
+        GET http://weather-information-api.herokuapp.com/weather/summary/berlin/<date>/<hour minute>/
 
     """
 
@@ -63,53 +99,37 @@ class WeatherSummaryView(generics.RetrieveAPIView):
         # date variables
         date = kwargs['date']
         time = kwargs['hour_minute']
+        city = kwargs['city']
 
-        valid_date, response = check_date(date, time)
+        valid_parameters, response = check_parameters(date, time, city)
 
-        if valid_date:
+        if valid_parameters:
             date_display = response
-        else:  # Error with the date parameters
+        else:  # Error with the parameters
             return response
 
-        city = kwargs['city']
-        api_key = settings.WEATHER_API_KEY
+        success, api_response = retrieve_data_from_api(city)
 
-        endpoint = 'http://api.openweathermap.org/data/2.5/weather?q=%s,DE&units=metric&appid=%s' % (city, api_key)
+        if success:
 
-        data_response = requests.get(endpoint)
+            temp = round(api_response['main']['temp'])
 
-        if data_response.status_code == 200:  # SUCCESS
-
-            data = data_response.json()
-            temp = round(data['main']['temp'])
-            print("ok")
-
-            response_data = {"description": data["weather"][0]["description"],
-                             "humidity": {"unit": "%", "value": data["main"]["humidity"]},
-                             "pressure": {"unit": "hPa", "value": data["main"]["pressure"]},
+            response_data = {"description": api_response["weather"][0]["description"],
+                             "humidity": {"unit": "%", "value": api_response["main"]["humidity"]},
+                             "pressure": {"unit": "hPa", "value": api_response["main"]["pressure"]},
                              "temperature": {"unit": "°C", "value": temp},
                              "timestamp": date_display.strftime('%Y-%m-%d %H:%M:%S'),
                              "status": "success"
                              }
 
             return Response(response_data)
-
         else:
-            response_data = {}
-            if data_response.status_code == 404:  # NOT FOUND
-                response_data['message'] = 'No forecasts available for this city: %s' % city
-            else:
-                response_data['message'] = 'The Weather API is not available at the moment. Please try again later.'
-
-            response_data['status'] = 'error'
-            return Response(response_data,
-                            status=status.HTTP_400_BAD_REQUEST
-                            )
+            return api_response
 
 
 class WeatherDetailView(generics.RetrieveAPIView):
     """
-       GET http://<domain-name>/weather/temperature/berlin/<date>/<hour minute>/
+       GET http://weather-information-api.herokuapp.com/weather/temperature/berlin/<date>/<hour minute>/
 
     """
 
@@ -117,42 +137,39 @@ class WeatherDetailView(generics.RetrieveAPIView):
         # datetime variables
         date = kwargs['date']
         time = kwargs['hour_minute']
+        city = kwargs['city']
 
-        valid_date, response = check_date(date, time)
+        valid_date, response = check_parameters(date, time, city)
 
         if valid_date:
             date_display = response
         else:  # Error with the date parameters
             return response
 
-        city = kwargs['city']
-        api_key = settings.WEATHER_API_KEY
+        detail = kwargs["detail"]
 
-        endpoint = 'http://api.openweathermap.org/data/2.5/weather?q=%s,DE&units=metric&appid=%s' % (city, api_key)
+        # checking valid details
+        invalid_detail = detail != "temperature" and detail != "pressure" and detail != "humidity"
 
-        data_response = requests.get(endpoint)
+        if not detail or invalid_detail:
+            return Response(
+                data={
+                    "message": "The given detail is invalid, the details available "
+                               " are: temperature, pressure and humidity",
+                    "status": "error"
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        if data_response.status_code == 200:  # SUCCESS
+        success, api_response = retrieve_data_from_api(city)
 
-            detail = kwargs["detail"]
-            data = data_response.json()
+        if success:
 
             if detail == "temperature":
-                value = round(data['main']['temp'])
+                value = round(api_response['main']['temp'])
 
             else:
-                try:
-                    value = data["main"][detail]
-
-                except KeyError:
-                    return Response(
-                        data={
-                            "message": "The given detail is invalid, the details available "
-                                       " are: temperature, pressure and humidity",
-                            "status": "error"
-                        },
-                        status=status.HTTP_400_BAD_REQUEST
-                    )
+                value = api_response["main"][detail]
 
             result_data = {"unit": UNITS[detail],
                            "value": value,
@@ -163,15 +180,7 @@ class WeatherDetailView(generics.RetrieveAPIView):
             return Response(result_data)
 
         else:
-            result_data = {}
-            if data_response.status_code == 404:  # NOT FOUND
-                result_data['message'] = 'No forecasts available for this city: %s' % city
-            else:
-                result_data['message'] = 'The Weather API is not available at the moment. Please try again later.'
-                result_data['status'] = 'error'
-            return Response(result_data,
-                            status=status.HTTP_400_BAD_REQUEST
-                            )
+            return api_response
 
 
 def home_view(request):

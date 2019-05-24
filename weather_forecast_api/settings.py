@@ -19,15 +19,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-SITE_DOMAIN = 'http://weatherinfo.ez'
+#SITE_DOMAIN = 'http://weatherinfo.ez'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ybsv1-x^f=^(t@%+jav-pdrr724gmk=eof_b+e!=w!e9t!t3i3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'weather_forecast_data',
 
 ]
+
+INTERNAL_IPS = ('127.0.0.1', '0.0.0.0', 'localhost')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,4 +123,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-WEATHER_API_KEY = config('WEATHER_APP_ID', default='')
+WEATHER_API_KEY = config('WEATHER_API_KEY', default='')
