@@ -5,6 +5,7 @@ from django.conf import settings
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import status
+from django.shortcuts import render
 
 from .utils import UNITS, is_valid_date
 
@@ -171,3 +172,9 @@ class WeatherDetailView(generics.RetrieveAPIView):
             return Response(result_data,
                             status=status.HTTP_400_BAD_REQUEST
                             )
+
+
+def home_view(request):
+    template = 'home.html'
+    context = {}
+    return render(request, template, context)
