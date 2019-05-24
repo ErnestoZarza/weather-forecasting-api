@@ -10,18 +10,8 @@ from django.shortcuts import render
 from .utils import UNITS, is_valid_date
 
 
-def check_parameters(date, time, city):
-    """Method that check if it is a invalid datetime and a valid city for the forecast service"""
-
-    if not city:
-        return False, Response(
-            data={
-                "message": "The city parameter can not be empty",
-                "status": "error"
-            },
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
+def check_parameters(date, time):
+    """Method that check if it is a invalid datetime for the forecast service"""
     try:
         # date variables
         year = int(date[0:4])
@@ -99,14 +89,15 @@ class WeatherSummaryView(generics.RetrieveAPIView):
         # date variables
         date = kwargs['date']
         time = kwargs['hour_minute']
-        city = kwargs['city']
 
-        valid_parameters, response = check_parameters(date, time, city)
+        valid_parameters, response = check_parameters(date, time)
 
         if valid_parameters:
             date_display = response
-        else:  # Error with the parameters
+        else:  # Error with the datetime parameters
             return response
+
+        city = kwargs['city']
 
         success, api_response = retrieve_data_from_api(city)
 
@@ -137,9 +128,8 @@ class WeatherDetailView(generics.RetrieveAPIView):
         # datetime variables
         date = kwargs['date']
         time = kwargs['hour_minute']
-        city = kwargs['city']
 
-        valid_date, response = check_parameters(date, time, city)
+        valid_date, response = check_parameters(date, time)
 
         if valid_date:
             date_display = response
@@ -160,6 +150,8 @@ class WeatherDetailView(generics.RetrieveAPIView):
                 },
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+        city = kwargs['city']
 
         success, api_response = retrieve_data_from_api(city)
 

@@ -2,21 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="780c42a2-27e2-4363-9ce5-c3b0341bfa0c" name="Default Changelist" comment="adding an external file for utils">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/weather_forecast_api.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/openweathermap_forecast_berlin.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weather_forecast_data/templates/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weather_forecast_data/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather_forecast_api/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/weather_forecast_api/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather_forecast_api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/weather_forecast_api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather_forecast_data/models.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/weather_forecast_data/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/weather_forecast_data/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,7 +46,7 @@
           <entry key="env" value="1" />
           <entry key="html" value="123" />
           <entry key="md" value="758" />
-          <entry key="py" value="3167" />
+          <entry key="py" value="3245" />
           <entry key="txt" value="500" />
         </counts>
       </usages-collector>
@@ -70,24 +55,23 @@
           <entry key="HTML" value="123" />
           <entry key="Markdown" value="758" />
           <entry key="PLAIN_TEXT" value="501" />
-          <entry key="Python" value="3193" />
+          <entry key="Python" value="3271" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/weather_forecast_data/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+            <state relative-caret-position="340">
+              <caret line="91" column="20" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="20" />
               <folding>
                 <element signature="e#1#16#0" expanded="true" />
-                <element signature="e#324#1753#0" />
-                <marker date="1558711253691" expanded="true" signature="417:1762" ph="..." />
-                <marker date="1558711253691" expanded="true" signature="1878:2672" ph="..." />
-                <marker date="1558711253691" expanded="true" signature="5724:5771" ph="..." />
+                <marker date="1558712377024" expanded="true" signature="394:1498" ph="..." />
+                <marker date="1558712377024" expanded="true" signature="1614:2477" ph="..." />
+                <marker date="1558712377024" expanded="true" signature="5571:5618" ph="..." />
               </folding>
             </state>
           </provider>
@@ -102,7 +86,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -183,8 +167,8 @@
         <option value="$PROJECT_DIR$/weather_forecast_api/urls.py" />
         <option value="$PROJECT_DIR$/weather_forecast_data/utils.py" />
         <option value="$PROJECT_DIR$/weather_forecast_data/templates/home.html" />
-        <option value="$PROJECT_DIR$/weather_forecast_data/views.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/weather_forecast_data/views.py" />
       </list>
     </option>
   </component>
@@ -216,12 +200,6 @@
               <item name="weather_forecast_api" type="b2602c69:ProjectViewProjectNode" />
               <item name="weather_forecast_api" type="462c0819:PsiDirectoryNode" />
               <item name="weather_forecast_data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="weather_forecast_api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="weather_forecast_api" type="462c0819:PsiDirectoryNode" />
-              <item name="weather_forecast_data" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -384,7 +362,7 @@
     <frame x="0" y="23" width="1440" height="797" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4978903" visible="true" weight="0.15503876" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978903" visible="true" weight="0.15503876" />
       <window_info id="Structure" order="1" sideWeight="0.5021097" side_tool="true" weight="0.24947146" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -572,20 +550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/weather_forecast_data/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
-          <folding>
-            <element signature="e#1#16#0" expanded="true" />
-            <element signature="e#324#1753#0" />
-            <marker date="1558711253691" expanded="true" signature="417:1762" ph="..." />
-            <marker date="1558711253691" expanded="true" signature="1878:2672" ph="..." />
-            <marker date="1558711253691" expanded="true" signature="5724:5771" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -593,6 +557,19 @@
             <caret line="121" column="66" selection-start-line="121" selection-start-column="66" selection-end-line="121" selection-end-column="66" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/weather_forecast_data/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="91" column="20" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="20" />
+          <folding>
+            <element signature="e#1#16#0" expanded="true" />
+            <marker date="1558712377024" expanded="true" signature="394:1498" ph="..." />
+            <marker date="1558712377024" expanded="true" signature="1614:2477" ph="..." />
+            <marker date="1558712377024" expanded="true" signature="5571:5618" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
