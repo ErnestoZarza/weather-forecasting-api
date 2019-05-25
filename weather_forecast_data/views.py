@@ -6,6 +6,8 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import status
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from .utils import UNITS, is_valid_date
 
@@ -79,12 +81,13 @@ def retrieve_data_from_api(city):
 
 
 class WeatherSummaryView(generics.RetrieveAPIView):
-    # TODO check empty entries
     """
-        GET http://weather-information-api.herokuapp.com/weather/summary/berlin/<date>/<hour minute>/
+        GET http://weather-information-api.herokuapp.com/weather/summary/<city>/<date>/<hour minute>/
 
     """
 
+    # Cache page for the requested url
+    @method_decorator(cache_page(60 * 60 * 2))
     def get(self, request, *args, **kwargs):
         # date variables
         date = kwargs['date']
@@ -120,10 +123,12 @@ class WeatherSummaryView(generics.RetrieveAPIView):
 
 class WeatherDetailView(generics.RetrieveAPIView):
     """
-       GET http://weather-information-api.herokuapp.com/weather/temperature/berlin/<date>/<hour minute>/
+       GET http://weather-information-api.herokuapp.com/weather/temperature/<city>/<date>/<hour minute>/
 
     """
 
+    # Cache page for the requested url
+    @method_decorator(cache_page(60 * 60 * 2))
     def get(self, request, *args, **kwargs):
         # datetime variables
         date = kwargs['date']
