@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Weather Forecast Information Service
+=======
+#  Weather Forecast API
+>>>>>>> 9c06dcc79b3a4a31b93298652ef54cbecf50b84b
 
 This project is an REST Service based web application that allows to retrieve information of the weather forecast for an
 specific city.
@@ -21,7 +25,11 @@ This application was implemented using the following technologies:
 ## Requirements
 
 * Python 3.x.x
+<<<<<<< HEAD
 * Django 2.x.x
+=======
+* Django 2.x
+>>>>>>> 9c06dcc79b3a4a31b93298652ef54cbecf50b84b
 
 ## Runing the application
 
@@ -39,6 +47,7 @@ $ python manage.py runserver
 
 ## Application
 
+<<<<<<< HEAD
 Running the application. This application can be visited using the following links 
 
 ```
@@ -51,6 +60,15 @@ https://weather-information-api.herokuapp.com
 In this repository file call .env.example, which is a prototype of the file the we use to 
 store the security information of the project (secret keys, etc) using "python-decouple"
 
+=======
+Running the server.  
+
+```
+http://127.0.0.1:8000/ (Temporary/Local)
+
+```
+
+>>>>>>> 9c06dcc79b3a4a31b93298652ef54cbecf50b84b
 
 ### API
 
@@ -63,10 +81,17 @@ combination.
 
 
 ```
+<<<<<<< HEAD
 curl https://weather-information-api.herokuapp.com/weather/summary/<city>/<date>/<hour minute>/
 
 example:
 https://weather-information-api.herokuapp.com/weather/summary/berlin/20190526/1800/
+=======
+curl http://<domain-name>/weather/summary/<city>/<date>/<hour minute>/
+
+example:
+http://127.0.0.1:8000/weather/summary/berlin/20190526/1800/
+>>>>>>> 9c06dcc79b3a4a31b93298652ef54cbecf50b84b
 ``` 
 
 
@@ -76,20 +101,36 @@ Endpoint to also retrieve specific details for each of [temperature, pressure, h
 for the specific location and date/time combination.
 
 ```
+<<<<<<< HEAD
 curl https://weather-information-api.herokuapp.com/weather/temperature/<city>/<date>/<hour minute>/
 
 example:
 https://weather-information-api.herokuapp.com/weather/temperature/berlin/20190526/1800/  
+=======
+curl http://<domain-name>/weather/temperature/<city>/<date>/<hour minute>/
+
+example:
+http://127.0.0.1:8000/weather/temperature/berlin/20190526/1800/  
+>>>>>>> 9c06dcc79b3a4a31b93298652ef54cbecf50b84b
 ```
 
 #### Error cases
 
+<<<<<<< HEAD
 The application controls if there are any errors in the calls.
 
 Example 1: This error is because the date in the call corresponds a date in the past / future (more than 5 days).
 
 ```
 curl https://weather-information-api.herokuapp.com/weather/summary/berlin/20190506/1800/
+=======
+The application controls if there are any errors.
+
+Example 1: This error is because the date in the call correspond date in the past.
+
+```
+curl http://127.0.0.1:8000/weather/summary/berlin/20190506/1800/
+>>>>>>> 9c06dcc79b3a4a31b93298652ef54cbecf50b84b
 
 The result will be:
 
@@ -103,7 +144,11 @@ The result will be:
 Example 2: If the date's format in the call is not valid.
 
 ```
+<<<<<<< HEAD
 curl https://weather-information-api.herokuapp.com/weather/summary/berlin/2019/1800/
+=======
+curl http://127.0.0.1:8000/weather/summary/berlin/2019/1800/
+>>>>>>> 9c06dcc79b3a4a31b93298652ef54cbecf50b84b
 
 The result will be:
 
@@ -115,7 +160,11 @@ The result will be:
 Example 3: If the detailed information in the call has an invalid name.
 
 ```
+<<<<<<< HEAD
 curl https://weather-information-api.herokuapp.com/weather/z/berlin/20190526/1800/
+=======
+curl http://127.0.0.1:8000/weather/z/berlin/20190526/1800/
+>>>>>>> 9c06dcc79b3a4a31b93298652ef54cbecf50b84b
 
 The result will be:
 
