@@ -5,18 +5,28 @@
     <title>Weather Forecast Service</title>
 </head>
 <body>
+<h1>Weather Forecast Service</h1>
 
- <p> This project is an REST Service based web application that allows to retrieve information of the weather forecast for an
+ <p> This project is an <strong>REST Service</strong> based web application that allows to retrieve information of the weather forecast for an
 specific city.</p>
 
+<h3>For a forecast summary use: </h3>
 
- <p> <strong>For a forecast summary use: </strong></p>
+<ul> <li>http://weather-information-api.herokuapp.com/weather/summary/[city]>/[date]/[hour_minutes]/</li></ul>
 
-<p>* http://weather-information-api.herokuapp.com/weather/summary/berlin/20190506/1800/</p>
+<strong>Example:</strong>
 
- <p><strong> For a forecast detailed use:</strong></p>
+ <ul> <li> https://weather-information-api.herokuapp.com/weather/summary/berlin/20190526/1800/</li></ul>
 
-<p>* http://weather-information-api.herokuapp.comweather/temperature/berlin/20190506/1800/</p>
+ <p> </p>
+
+<h3> For a forecast detailed use:</h3>
+
+<ul> <li>http://weather-information-api.herokuapp.com/weather/[temperature, pressure, humidity]/[city]>/[date]/[hour_minutes]</li></ul>
+
+<strong>Example:</strong>
+
+ <ul> <li>https://weather-information-api.herokuapp.com/weather/temperature/hamburg/20190526/1800/</li></ul>
 
 
 
