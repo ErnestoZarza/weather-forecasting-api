@@ -39,12 +39,17 @@ $ python manage.py runserver
 
 ## Application
 
-Running the application.  
+Running the application. This application can be visited using the following links 
 
 ```
 https://weather-information-api.herokuapp.com
 
 ```
+
+## Clarifications
+
+In this repository file call .env.example, which is a prototype of the file the we use to 
+store the security information of the project (secret keys, etc) using "python-decouple"
 
 
 ### API
@@ -79,9 +84,9 @@ https://weather-information-api.herokuapp.com/weather/temperature/berlin/2019052
 
 #### Error cases
 
-The application controls if there are any errors.
+The application controls if there are any errors in the calls.
 
-Example 1: This error is because the date in the call correspond date in the past / future (more than 5 days).
+Example 1: This error is because the date in the call corresponds a date in the past / future (more than 5 days).
 
 ```
 curl https://weather-information-api.herokuapp.com/weather/summary/berlin/20190506/1800/
@@ -107,7 +112,7 @@ The result will be:
 
 ```
 
-Example 3: If the detailed information in the call has an invalid name or is empty.
+Example 3: If the detailed information in the call has an invalid name.
 
 ```
 curl https://weather-information-api.herokuapp.com/weather/z/berlin/20190526/1800/
@@ -119,7 +124,7 @@ The result will be:
 
 ```
 
-Example 4: If the city in the call has an invalid name or is empty.
+Example 4: If the city in the call has an invalid name.
 
 ```
 curl http://127.0.0.1:8000/weather/temperature/be/20190526/1800/
